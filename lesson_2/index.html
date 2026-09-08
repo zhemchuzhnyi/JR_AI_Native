@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Разделите счёт поровну между всеми участниками.">
+  <title>Делим счёт</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div class="currency-field" id="currency-field" aria-hidden="true"></div>
+  <main class="app-shell">
+    <section class="calculator-card" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">ДЛЯ КОМПАНИИ</p>
+        <h1 id="page-title">Делим счёт</h1>
+        <p class="intro__copy">Введите итоговую сумму и количество людей, чтобы узнать сумму для каждого.</p>
+      </div>
+
+      <form class="split-form" id="split-form" novalidate>
+        <div class="field-group">
+          <label for="total-bill">Итоговая сумма</label>
+          <div class="input-wrap">
+            <span class="input-prefix" aria-hidden="true">₽</span>
+            <input
+              id="total-bill"
+              name="totalBill"
+              type="number"
+              inputmode="decimal"
+              min="0.01"
+              step="0.01"
+              placeholder="0,00"
+              autocomplete="off"
+              aria-describedby="total-bill-error"
+              required
+            >
+          </div>
+          <p class="field-error" id="total-bill-error" role="alert"></p>
+        </div>
+
+        <div class="field-group">
+          <label for="number-of-people">Количество людей</label>
+          <input
+            id="number-of-people"
+            name="numberOfPeople"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            step="1"
+            placeholder="2"
+            autocomplete="off"
+            aria-describedby="number-of-people-error"
+            required
+          >
+          <p class="field-error" id="number-of-people-error" role="alert"></p>
+        </div>
+
+        <button class="submit-button" type="submit">Разделить счёт</button>
+      </form>
+
+      <section class="result" id="result" aria-live="polite" aria-atomic="true" hidden>
+        <p class="result__label">Каждый платит</p>
+        <p class="result__amount"><span id="share-amount">0,00</span> <span class="result__currency">₽</span></p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
