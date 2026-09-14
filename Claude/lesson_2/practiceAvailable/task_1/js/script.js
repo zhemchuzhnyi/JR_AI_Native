@@ -20,9 +20,7 @@
     newRun: document.getElementById('new-run'),
     nextStep: document.getElementById('next-step'),
     autoRun: document.getElementById('auto-run'),
-    compare: document.getElementById('compare'),
-    tournament: document.getElementById('tournament')
-л
+    compare: document.getElementById('compare')
   };
   const BOT_RUNS = 100;
   const bots = [
@@ -253,5 +251,6 @@
   els.nextStep.addEventListener('click', step);
   els.autoRun.addEventListener('click', startAuto);
   els.compare.addEventListener('click', compareStrategies);
+  els.tournament.addEventListener('click', runTournament);
   resetRun();
 })();
