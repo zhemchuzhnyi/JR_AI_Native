@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Интерактивный турнир стратегий в повторяющейся дилемме заключённого.">
+  <title>Теория игр: турнир Аксельрода</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">ТУРНИР АКСЕЛЬРОДА</p>
+      <h1>Теория игр<br><span>в действии</span></h1>
+      <p class="lead">Пять стратегий встречаются снова и снова. Смотрите, как доверие, наказание и память превращаются в очки.</p>
+    </header>
+
+    <section class="panel intro-panel" aria-labelledby="rules-title">
+      <div>
+        <p class="eyebrow">ПОВТОРЯЮЩАЯСЯ ДИЛЕММА</p>
+        <h2 id="rules-title">Один раунд — два выбора</h2>
+        <p>В каждом раунде боты одновременно выбирают сотрудничество или предательство. В турнире каждый играет с каждым: 10 матчей по 100 раундов.</p>
+      </div>
+      <div class="payoff-block">
+        <h3>Матрица очков</h3>
+        <table class="payoff-table">
+          <caption>Очки: бот A / бот B</caption>
+          <thead><tr><th></th><th>Сотрудничать</th><th>Предать</th></tr></thead>
+          <tbody><tr><th scope="row">Сотрудничать</th><td class="mutual">3 / 3</td><td>0 / 5</td></tr><tr><th scope="row">Предать</th><td>5 / 0</td><td class="conflict">1 / 1</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel strategies" aria-labelledby="strategies-title">
+      <p class="eyebrow">УЧАСТНИКИ</p>
+      <h2 id="strategies-title">Пять характеров</h2>
+      <div class="strategy-list">
+        <article><b>ВСЕГДА СОТРУДНИЧАТЬ</b><p>Верит каждому — и рискует быть использованным.</p></article>
+        <article><b>ВСЕГДА ПРЕДАВАТЬ</b><p>Берёт 5 против доверчивых, но застревает на 1/1.</p></article>
+        <article class="featured"><b>ОКО ЗА ОКО</b><p>Доброе, мстительное, отходчивое и понятное.</p></article>
+        <article><b>СЛУЧАЙНЫЙ БОТ</b><p>Не помнит прошлое и выбирает действие случайно.</p></article>
+        <article><b>ПОДОЗРИТЕЛЬНОЕ ОКО</b><p>Начинает с предательства, затем отвечает взаимностью.</p></article>
+      </div>
+    </section>
+
+    <section class="panel tournament" aria-labelledby="tournament-title">
+      <div class="section-heading"><div><p class="eyebrow">ЭКСПЕРИМЕНТ</p><h2 id="tournament-title">Круговой турнир</h2></div><button class="button button--primary" id="run-tournament" type="button">Запустить турнир</button></div>
+      <p class="hint">Рейтинг строится по сумме очков во всех матчах. Лидер не назначен заранее.</p>
+      <div class="table-wrap"><table class="leaderboard"><caption>Итоговый рейтинг стратегий</caption><thead><tr><th>Место</th><th>Стратегия</th><th>Очки</th><th>Ср. за матч</th><th>П / Н / П</th></tr></thead><tbody id="leaderboard"><tr><td colspan="5">Запустите турнир, чтобы получить результаты.</td></tr></tbody></table></div>
+      <p class="live-result" id="tournament-result" aria-live="polite">Каждая пара сыграет на одинаковых условиях.</p>
+    </section>
+
+    <section class="panel match-viewer" aria-labelledby="match-title">
+      <div class="section-heading"><div><p class="eyebrow">ЛАБОРАТОРИЯ</p><h2 id="match-title">Один матч пошагово</h2></div><p class="round-label" id="round-label">Раунд 0 / 100</p></div>
+      <div class="match-controls"><label for="bot-a">Бот A<select id="bot-a"></select></label><label for="bot-b">Бот B<select id="bot-b"></select></label><button class="button" id="new-match" type="button">Новый матч</button><button class="button" id="next-round" type="button">Следующий раунд</button></div>
+      <div class="match-score"><article><span id="bot-a-name">Бот A</span><strong id="bot-a-score">0</strong><em id="bot-a-action">—</em></article><div class="versus">VS</div><article><span id="bot-b-name">Бот B</span><strong id="bot-b-score">0</strong><em id="bot-b-action">—</em></article></div>
+      <p class="round-result" id="round-result" aria-live="polite">Нажмите «Следующий раунд», чтобы начать.</p>
+    </section>
+
+    <section class="panel lesson" aria-labelledby="lesson-title">
+      <p class="eyebrow">ПОЧЕМУ ЭТО РАБОТАЕТ</p><h2 id="lesson-title">Четыре свойства «око за око»</h2>
+      <div class="traits"><div><b>ДОБРОЕ</b><span>Не предаёт первым и начинает с сотрудничества.</span></div><div><b>МСТИТЕЛЬНОЕ</b><span>Сразу отвечает предательством на предательство.</span></div><div><b>ОТХОДЧИВОЕ</b><span>Возвращается к сотрудничеству, как только соперник перестал предавать.</span></div><div><b>ПОНЯТНОЕ</b><span>Предсказуемо: сопернику легко понять правила и наладить взаимность.</span></div></div>
+      <p class="lesson-copy">В турнире Аксельрода простое tit-for-tat часто набирает больше остальных: с добрыми ботами оно получает длинные серии 3/3, не позволяет себя безнаказанно эксплуатировать и не застревает в конфликте. Это сильная стратегия в данных условиях, но не универсальная гарантия.</p>
+      <p class="reference">Идеи вдохновлены роликом Veritasium «Теория игр: жизнь, Вселенная и всё остальное».</p>
+    </section>
+  </main>
+</body>
+</html>
