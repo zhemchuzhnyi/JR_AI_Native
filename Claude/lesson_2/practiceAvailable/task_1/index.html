@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Интерактивная симуляция стратегии в задаче о 100 заключённых и 100 ящиках.">
+  <title>100 заключённых и 100 ящиков</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <p class="eyebrow">ВЕРОЯТНОСТНЫЙ ПАРАДОКС</p>
+      <h1>100 заключённых<br><span>и 100 ящиков</span></h1>
+      <p class="lead">Найдите свой номер максимум за 50 открытий. Ошибка одного — проигрыш всей группы.</p>
+      <div class="rules" aria-label="Правила задачи">
+        <div><strong>100</strong><span>заключённых</span></div>
+        <div><strong>100</strong><span>ящиков</span></div>
+        <div><strong>50</strong><span>открытий</span></div>
+      </div>
+    </header>
+
+    <section class="panel controls-panel" aria-labelledby="controls-title">
+      <h2 id="controls-title">Настройка забега</h2>
+      <div class="control-grid">
+        <fieldset>
+          <legend>Стратегия поиска</legend>
+          <label class="choice"><input type="radio" name="strategy" value="cycle" checked><span>Следование по циклу</span></label>
+          <label class="choice"><input type="radio" name="strategy" value="random"><span>Случайный поиск</span></label>
+        </fieldset>
+        <fieldset>
+          <legend>Режим просмотра</legend>
+          <label class="choice"><input type="radio" name="mode" value="step" checked><span>Пошаговый</span></label>
+          <label class="choice"><input type="radio" name="mode" value="auto"><span>Автоматический</span></label>
+        </fieldset>
+      </div>
+      <div class="button-row">
+        <button class="button button--primary" id="new-run" type="button">Новый забег</button>
+        <button class="button" id="next-step" type="button">Следующий шаг</button>
+        <button class="button" id="auto-run" type="button">Запустить автоматически</button>
+      </div>
+    </section>
+
+    <section class="panel simulation-panel" aria-labelledby="simulation-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ТЕКУЩИЙ ЗАБЕГ</p>
+          <h2 id="simulation-title">Поле ящиков</h2>
+        </div>
+        <p class="status status--neutral" id="status" aria-live="polite">Готово к запуску</p>
+      </div>
+      <div class="progress-line"><span id="progress-label">Заключённый 0 из 100</span><span id="attempt-label">Открытий: 0 / 50</span></div>
+      <div class="box-grid" id="box-grid" aria-label="100 ящиков"></div>
+      <div class="legend" aria-label="Обозначения">
+        <span><i class="swatch swatch--opened"></i>Открыт</span>
+        <span><i class="swatch swatch--current"></i>Текущий</span>
+        <span><i class="swatch swatch--found"></i>Найден номер</span>
+      </div>
+    </section>
+
+    <section class="results-grid" aria-label="Результаты">
+      <article class="panel result-card">
+        <p class="eyebrow">ИТОГ</p>
+        <h2 id="result-title">Забег не начат</h2>
+        <p id="result-copy">Запустите симуляцию, чтобы увидеть, как работает стратегия.</p>
+        <dl class="stats"><div><dt>Успешно</dt><dd id="success-count">0</dd></div><div><dt>Открытий</dt><dd id="total-attempts">0</dd></div></dl>
+      </article>
+      <article class="panel compare-card">
+        <p class="eyebrow">СРАВНЕНИЕ</p>
+        <h2>Серия забегов</h2>
+        <p>100 быстрых забегов каждой стратегией без анимации.</p>
+        <button class="button" id="compare" type="button">Сравнить стратегии</button>
+        <p class="compare-result" id="compare-result" aria-live="polite">Результаты появятся здесь.</p>
+      </article>
+    </section>
+
+    <section class="panel explainer" aria-labelledby="explanation-title">
+      <p class="eyebrow">КАК ЭТО РАБОТАЕТ</p>
+      <h2 id="explanation-title">Сила циклов</h2>
+      <p>При стратегии циклов заключённый сначала открывает ящик со своим номером. Затем номер на найденной карточке указывает на следующий ящик. Так случайная перестановка превращается в цепочки — циклы. Группа проигрывает только тогда, когда существует цикл длиннее 50.</p>
+      <p>Случайный поиск не использует структуру перестановки, поэтому шанс общего успеха намного ниже. Ни одна стратегия не гарантирует спасение: каждый забег зависит от случайной раскладки.</p>
+    </section>
+  </main>
+</body>
+</html>
