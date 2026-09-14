@@ -133,8 +133,7 @@
     state.totalAttempts += state.opened.length;
     state.prisoner += 1;
     state.opened = [];
-    state.currentBox = null;
-    state.foundBox = null;
+    state.currentBox = state.foundBox;
     if (!found) {
       state.running = false;
       state.complete = true;

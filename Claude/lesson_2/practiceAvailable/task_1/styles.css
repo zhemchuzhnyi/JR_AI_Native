@@ -54,7 +54,10 @@ h1, h2, p { margin-top: 0; }
 h1 { margin-bottom: 18px; font-size: clamp(2.1rem, 7vw, 5rem); line-height: .98; letter-spacing: -.08em; text-transform: uppercase; }
 h1 span { color: var(--orange); }
 h2 { margin-bottom: 8px; font-size: clamp(1.1rem, 2vw, 1.5rem); text-transform: uppercase; }
-.lead { max-width: 650px; margin-bottom: 24px; color: var(--muted); }
+.lead { max-width: 650px; margin-bottom: 16px; color: var(--muted); }
+.theory-note { display: grid; gap: 4px; max-width: 650px; margin-bottom: 16px; padding: 12px 14px; border-left: 4px solid var(--orange); background: rgba(255, 255, 255, .55); font-size: .8rem; }
+.theory-note strong { color: var(--green); text-transform: uppercase; }
+.reference { margin: 0 0 24px; color: var(--muted); font-size: .76rem; }
 .rules { display: flex; flex-wrap: wrap; gap: 10px; }
 .rules div { display: grid; min-width: 130px; padding: 10px 14px; border: 3px solid var(--green); background: var(--green-soft); box-shadow: 3px 3px 0 var(--green); }
 .rules strong { font-size: 1.6rem; line-height: 1; }
