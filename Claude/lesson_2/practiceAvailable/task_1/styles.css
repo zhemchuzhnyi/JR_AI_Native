@@ -14,7 +14,34 @@
 
 * { box-sizing: border-box; }
 html { min-width: 320px; background: var(--paper); }
-body { margin: 0; color: var(--ink); background: linear-gradient(135deg, #fffdf8 0%, #f1f6e9 100%); font-family: "Courier New", Courier, monospace; line-height: 1.5; }
+body {
+  position: relative;
+  isolation: isolate;
+  margin: 0;
+  color: var(--ink);
+  background: radial-gradient(circle at 50% 43%, #f7f7f7 0%, #d7d7d7 36%, #969696 72%, #505050 100%);
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.5;
+}
+
+body::before {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  background: url("assets/veritasium-inspired.svg") center / min(920px, 92vw) auto no-repeat;
+  content: "";
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+body::after {
+  position: fixed;
+  z-index: -2;
+  inset: 0;
+  background: radial-gradient(circle at 50% 43%, transparent 0 24%, rgba(255, 255, 255, 0.08) 48%, rgba(0, 0, 0, 0.18) 100%);
+  content: "";
+  pointer-events: none;
+}
 button, input { font: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .5; }
