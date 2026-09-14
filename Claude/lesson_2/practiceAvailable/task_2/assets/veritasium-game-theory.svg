@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-labelledby="title desc">
+  <title id="title">Схема повторяющейся дилеммы</title>
+  <desc id="desc">Абстрактная научная схема взаимодействия стратегий</desc>
+  <g fill="none" stroke="#343434" stroke-width="4" opacity=".72">
+    <path d="M160 320h680M500 90v460" stroke-width="2" stroke-dasharray="8 12"/>
+    <circle cx="500" cy="320" r="150" stroke-dasharray="18 12"/>
+    <ellipse cx="500" cy="320" rx="330" ry="120"/>
+    <path d="M180 180Q500 470 820 180M180 460Q500 170 820 460"/>
+    <path d="M265 320h80m310 0h80"/>
+  </g>
+  <g fill="#3d3d3d" opacity=".78">
+    <circle cx="500" cy="320" r="22"/>
+    <circle cx="190" cy="320" r="13"/><circle cx="810" cy="320" r="13"/>
+    <circle cx="500" cy="170" r="10"/><circle cx="500" cy="470" r="10"/>
+  </g>
+  <g fill="#333" font-family="monospace" font-size="27" opacity=".62">
+    <text x="72" y="92">REPEATED GAME</text>
+    <text x="720" y="92">ROUND 100</text>
+    <text x="75" y="590">COOPERATE</text>
+    <text x="755" y="590">DEFECT</text>
+    <text x="424" y="64">TIT-FOR-TAT</text>
+  </g>
+</svg>
