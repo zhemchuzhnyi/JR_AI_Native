@@ -98,6 +98,18 @@ legend { padding: 0 6px; color: var(--green); font-size: .78rem; font-weight: 70
 .compare-result { min-height: 3em; margin: 18px 0 0; color: var(--green); font-size: .82rem; white-space: pre-line; }
 .explainer { border-color: var(--green); }
 .explainer p:last-child { margin-bottom: 0; }
+.tournament-panel { margin-bottom: 28px; }
+.tournament-panel > p { max-width: 760px; }
+.table-wrap { margin-top: 20px; overflow-x: auto; }
+.leaderboard { width: 100%; border-collapse: collapse; font-size: .78rem; }
+.leaderboard caption { margin-bottom: 8px; color: var(--muted); text-align: left; }
+.leaderboard th, .leaderboard td { padding: 10px 8px; border-bottom: 2px solid var(--line); text-align: left; }
+.leaderboard th { color: var(--green); font-size: .7rem; text-transform: uppercase; }
+.leaderboard tr.is-winner { background: var(--green-soft); color: var(--green); font-weight: 700; }
+.tournament-result { min-height: 1.5em; margin: 18px 0 0; color: var(--green); font-weight: 700; }
+@media (max-width: 680px) {
+  .leaderboard { min-width: 600px; }
+}
 
 @media (max-width: 680px) {
   .app-shell { width: min(100% - 20px, 1120px); padding-top: 22px; }

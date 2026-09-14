@@ -14,11 +14,23 @@
     success: document.getElementById('success-count'),
     totalAttempts: document.getElementById('total-attempts'),
     compareResult: document.getElementById('compare-result'),
+    tournament: document.getElementById('tournament'),
+    leaderboard: document.getElementById('leaderboard-body'),
+    tournamentResult: document.getElementById('tournament-result'),
     newRun: document.getElementById('new-run'),
     nextStep: document.getElementById('next-step'),
     autoRun: document.getElementById('auto-run'),
-    compare: document.getElementById('compare')
+    compare: document.getElementById('compare'),
+    tournament: document.getElementById('tournament')
+л
   };
+  const BOT_RUNS = 100;
+  const bots = [
+    { id: 'random', name: 'Случайный перебор', pick: (prisoner, attempt, previous, opened) => randomBox(opened) },
+    { id: 'sequential', name: 'Последовательный перебор', pick: (prisoner, attempt) => (prisoner + attempt) % TOTAL },
+    { id: 'anchor', name: 'Старт со своего номера', pick: (prisoner, attempt, previous) => attempt === 0 ? prisoner : (previous + 1) % TOTAL },
+    { id: 'cycle', name: 'Следование по циклу', pick: (prisoner, attempt, previous, opened, permutation) => attempt === 0 ? prisoner : permutation[previous] - 1 }
+  ];
   const state = {
     permutation: [],
     boxes: [],
@@ -36,6 +48,10 @@
 
   function strategy() { return document.querySelector('input[name="strategy"]:checked').value; }
   function mode() { return document.querySelector('input[name="mode"]:checked').value; }
+  function randomBox(opened) {
+    const available = Array.from({ length: TOTAL }, (_, index) => index).filter((index) => !opened.includes(index));
+    return available[Math.floor(Math.random() * available.length)];
+  }
 
   // Fisher-Yates keeps every permutation equally likely.
   function shuffle() {
@@ -174,22 +190,19 @@
     requestAnimationFrame(loop);
   }
 
-  function simulate(strategyName) {
-    const permutation = shuffle();
+  function simulate(strategyName, sharedPermutation) {
+    const permutation = sharedPermutation || shuffle();
+    const bot = bots.find((item) => item.id === strategyName) || bots[0];
     let successful = 0;
     let attempts = 0;
     for (let prisoner = 0; prisoner < TOTAL; prisoner += 1) {
       const opened = [];
-      let box = prisoner;
+      let previous = null;
       let found = false;
       for (let attempt = 0; attempt < LIMIT; attempt += 1) {
-        if (strategyName === 'random') {
-          const available = Array.from({ length: TOTAL }, (_, index) => index).filter((index) => !opened.includes(index));
-          box = available[Math.floor(Math.random() * available.length)];
-        } else if (attempt > 0) {
-          box = permutation[box] - 1;
-        }
+        const box = bot.pick(prisoner, attempt, previous, opened, permutation);
         opened.push(box);
+        previous = box;
         attempts += 1;
         if (permutation[box] === prisoner + 1) { found = true; break; }
       }
@@ -201,14 +214,37 @@
 
   function compareStrategies() {
     const totals = { cycle: { wins: 0, people: 0 }, random: { wins: 0, people: 0 } };
-    ['cycle', 'random'].forEach((name) => {
-      for (let run = 0; run < COMPARISON_RUNS; run += 1) {
-        const result = simulate(name);
+    for (let run = 0; run < COMPARISON_RUNS; run += 1) {
+      const permutation = shuffle();
+      ['cycle', 'random'].forEach((name) => {
+        const result = simulate(name, permutation);
         if (result.success) totals[name].wins += 1;
         totals[name].people += result.successful;
+      });
+    }
+    els.compareResult.textContent = 'За ' + COMPARISON_RUNS + ' одинаковых раскладок:\nЦиклы: ' + totals.cycle.wins + ' полных успехов; ' + Math.round(totals.cycle.people / COMPARISON_RUNS) + ' спасённых в среднем.\nСлучайный поиск: ' + totals.random.wins + ' полных успехов; ' + Math.round(totals.random.people / COMPARISON_RUNS) + ' спасённых в среднем.';
+  }
+
+  function runTournament() {
+    const scores = bots.map((bot) => ({ id: bot.id, name: bot.name, wins: 0, people: 0, games: 0 }));
+    for (let left = 0; left < bots.length; left += 1) {
+      for (let right = left + 1; right < bots.length; right += 1) {
+        for (let run = 0; run < BOT_RUNS; run += 1) {
+          const permutation = shuffle();
+          const leftResult = simulate(bots[left].id, permutation);
+          const rightResult = simulate(bots[right].id, permutation);
+          const leftScore = scores[left];
+          const rightScore = scores[right];
+          leftScore.games += 1; rightScore.games += 1;
+          leftScore.people += leftResult.successful; rightScore.people += rightResult.successful;
+          if (leftResult.success) leftScore.wins += 1;
+          if (rightResult.success) rightScore.wins += 1;
+        }
       }
-    });
-    els.compareResult.textContent = 'За ' + COMPARISON_RUNS + ' забегов:\nЦиклы: ' + totals.cycle.wins + ' полных успехов; ' + totals.cycle.people + ' спасённых заключённых.\nСлучайный поиск: ' + totals.random.wins + ' полных успехов; ' + totals.random.people + ' спасённых заключённых.';
+    }
+    scores.sort((a, b) => b.wins - a.wins || b.people - a.people);
+    els.leaderboard.innerHTML = scores.map((score, index) => '<tr class="' + (index === 0 ? 'is-winner' : '') + '"><td>' + (index + 1) + '</td><td>' + score.name + '</td><td>' + score.wins + ' / ' + score.games + '</td><td>' + Math.round(score.people / score.games) + '</td></tr>').join('');
+    els.tournamentResult.textContent = 'Лидер эксперимента: ' + scores[0].name + '. Рейтинг отсортирован по полным победам группы.';
   }
 
   window.PRISONERS_SIM = { resetRun, step, startAuto, compareStrategies, simulate, shuffle, state };

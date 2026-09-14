@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Научная фоновая иллюстрация</title>
+  <desc id="desc">Абстрактная схема вероятностей с орбитами и формулами</desc>
+  <g fill="none" stroke="#2c2c2c" stroke-width="4" opacity=".72">
+    <circle cx="450" cy="310" r="110" stroke-dasharray="12 14"/>
+    <circle cx="450" cy="310" r="210" stroke-dasharray="5 17"/>
+    <path d="M90 470 C230 120 670 120 810 470"/>
+    <path d="M120 170 C320 500 580 500 780 170"/>
+    <path d="M450 72v476M212 310h476" stroke-width="2" opacity=".55"/>
+  </g>
+  <g fill="#414141" opacity=".7">
+    <circle cx="450" cy="310" r="18"/>
+    <circle cx="240" cy="202" r="9"/>
+    <circle cx="669" cy="420" r="9"/>
+    <circle cx="585" cy="128" r="7"/>
+    <circle cx="314" cy="492" r="7"/>
+  </g>
+  <g fill="#303030" font-family="monospace" font-size="28" opacity=".62">
+    <text x="68" y="104">P(success)</text>
+    <text x="660" y="104">50 / 100</text>
+    <text x="72" y="560">CYCLES ≠ RANDOM</text>
+    <text x="650" y="560">∑ 1…100</text>
+  </g>
+</svg>

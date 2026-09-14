@@ -68,11 +68,26 @@
       </article>
       <article class="panel compare-card">
         <p class="eyebrow">СРАВНЕНИЕ</p>
-        <h2>Серия забегов</h2>
-        <p>100 быстрых забегов каждой стратегией без анимации.</p>
+        <h2>Случайность против циклов</h2>
+        <p>100 одинаковых по правилам забегов каждой стратегией.</p>
         <button class="button" id="compare" type="button">Сравнить стратегии</button>
         <p class="compare-result" id="compare-result" aria-live="polite">Результаты появятся здесь.</p>
       </article>
+    </section>
+
+    <section class="panel tournament-panel" aria-labelledby="tournament-title">
+      <p class="eyebrow">ТЕОРИЯ ИГР</p>
+      <h2 id="tournament-title">Турнир стратегий</h2>
+      <p>Каждый бот играет с каждым на 100 общих раскладках. Победитель определяется экспериментом: главное — число партий, где спаслись все 100 заключённых.</p>
+      <button class="button button--primary" id="tournament" type="button">Запустить турнир</button>
+      <div class="table-wrap">
+        <table class="leaderboard">
+          <caption>Рейтинг ботов по полным победам</caption>
+          <thead><tr><th scope="col">Место</th><th scope="col">Бот</th><th scope="col">Победы</th><th scope="col">Среднее спасённых</th></tr></thead>
+          <tbody id="leaderboard-body"><tr><td colspan="4">Турнир ещё не запускался.</td></tr></tbody>
+        </table>
+      </div>
+      <p class="tournament-result" id="tournament-result" aria-live="polite">Сильная стратегия всплывёт из честного турнира.</p>
     </section>
 
     <section class="panel explainer" aria-labelledby="explanation-title">
