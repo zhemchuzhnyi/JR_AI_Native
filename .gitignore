@@ -1,6 +1,43 @@
-# Личные заметки и файлы — не попадают в общий доступ
+# Личные заметки и локальные инструкции
 commands.md
-.idea/
+.claude/
 
-# Служебные файлы macOS
+# Секреты и локальные переменные окружения
+.env
+.env.*
+!.env.example
+*.secret
+*.secrets
+*credentials*
+*credential*
+*token*
+
+# Ключи и сертификаты
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+
+# Локальные настройки инструментов и IDE
+.idea/
+.vscode/
+*.local
+
+# Виртуальные окружения и кэши
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+
+# Логи, временные и локально сгенерированные файлы
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
 .DS_Store
