@@ -4,3 +4,4 @@ const greeting = name => {
 }
 
 console.log(greeting('Alex'))
+
