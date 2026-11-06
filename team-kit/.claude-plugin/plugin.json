@@ -1,0 +1,8 @@
+{
+  "name": "team-kit",
+  "description": "Team skills for Git commits and prompt improvement",
+  "version": "1.0.0",
+  "author": {
+    "name": "Development Team"
+  }
+}
